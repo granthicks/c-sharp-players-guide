@@ -1,0 +1,31 @@
+﻿// Creating variables of all types
+byte a_byte = 255;
+short a_short = 25000;
+int a_int = 0b00001101;
+long a_long = 1678600987838;
+sbyte a_sbyte = 12;
+ushort a_ushort = 42000;
+uint a_uint = 250555000;
+ulong a_ulong = 75888999000444555;
+float a_float = 7.98F;
+double a_double = 3.654654645;
+decimal a_decimal = 4.5059595959595952923M;
+bool is_true = false;
+char a_letter = '\u0061';
+string a_string = "This is a string.";
+
+Console.WriteLine(a_byte);
+Console.WriteLine(a_short);
+Console.WriteLine(a_int);
+Console.WriteLine(a_long);
+Console.WriteLine(a_sbyte);
+Console.WriteLine(a_ushort);
+Console.WriteLine(a_uint);
+Console.WriteLine(a_ulong);
+Console.WriteLine(a_float);
+Console.WriteLine(a_double);
+Console.WriteLine(a_decimal);
+Console.WriteLine(is_true);
+Console.WriteLine(a_letter);
+Console.WriteLine(a_string);
+Console.WriteLine(is_true);
