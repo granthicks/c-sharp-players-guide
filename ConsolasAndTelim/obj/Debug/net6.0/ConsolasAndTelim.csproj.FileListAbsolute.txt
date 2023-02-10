@@ -1,0 +1,15 @@
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\bin\Debug\net6.0\ConsolasAndTelim.exe
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\bin\Debug\net6.0\ConsolasAndTelim.deps.json
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\bin\Debug\net6.0\ConsolasAndTelim.runtimeconfig.json
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\bin\Debug\net6.0\ConsolasAndTelim.dll
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\bin\Debug\net6.0\ConsolasAndTelim.pdb
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\obj\Debug\net6.0\ConsolasAndTelim.csproj.AssemblyReference.cache
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\obj\Debug\net6.0\ConsolasAndTelim.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\obj\Debug\net6.0\ConsolasAndTelim.AssemblyInfoInputs.cache
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\obj\Debug\net6.0\ConsolasAndTelim.AssemblyInfo.cs
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\obj\Debug\net6.0\ConsolasAndTelim.csproj.CoreCompileInputs.cache
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\obj\Debug\net6.0\ConsolasAndTelim.dll
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\obj\Debug\net6.0\refint\ConsolasAndTelim.dll
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\obj\Debug\net6.0\ConsolasAndTelim.pdb
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\obj\Debug\net6.0\ConsolasAndTelim.genruntimeconfig.cache
+C:\Users\ghicks\projects\c-sharp-players-guide\ConsolasAndTelim\obj\Debug\net6.0\ref\ConsolasAndTelim.dll
