@@ -29,36 +29,10 @@ Console.Title = "Hunting the Manticore";
 
 int ManticoreHealth = 10;
 int CityHealth = 15;
-int ManticoreDistance = -1;
-bool ValidDistance = false;
 int GameRound = 1;
 
 // Prompt for Manticore distance
-while (ManticoreDistance < 0 || ManticoreDistance > 100)
-{
-    while (!ValidDistance)
-    {
-        Console.WriteLine("Player 1: Input the Manticore's distance from the city (0-100): ");
-        string strDistance = Console.ReadLine();
-        bool IsInt = int.TryParse(strDistance, out ManticoreDistance);
-        if (IsInt == true && ManticoreDistance >= 0 && ManticoreDistance <= 100)
-            ValidDistance = true;
-        else if (ManticoreDistance > 100 || ManticoreDistance < 0)
-        {
-            Console.WriteLine("Distance must be between 0 and 100!");
-        }
-        else
-        {
-            Console.WriteLine("Please enter a valid number for the distance.");
-        }
-    }
-    
-    if (ManticoreDistance == 69)
-    {
-        Console.WriteLine("Nice.");
-        Thread.Sleep(1000);
-    }
-}
+int ManticoreDistance = PromptForNumber("Player 1: Input the Manticore's distance from the city (0-100): ", 0, 100);
 Console.Clear();
 
 while (ManticoreHealth > 0 && CityHealth > 0)
@@ -71,4 +45,36 @@ while (ManticoreHealth > 0 && CityHealth > 0)
     GameRound++;
     CityHealth--;
     ManticoreHealth--;
+}
+
+int PromptForNumber(string message, int MinNum, int MaxNum)
+{
+    int PromptNum = MinNum - 1;
+    bool IsValid = false;
+
+    while (PromptNum < MinNum || PromptNum > MaxNum)
+    {
+        while (!IsValid)
+        {
+            Console.WriteLine(message);
+            string strDistance = Console.ReadLine();
+            bool IsInt = int.TryParse(strDistance, out PromptNum);
+            if (IsInt == true && PromptNum >= MinNum && PromptNum <= MaxNum)
+                IsValid = true;
+            else if (PromptNum > MaxNum || PromptNum < MinNum)
+            {
+                Console.WriteLine($"Number must be between {MinNum} and {MaxNum}!");
+            }
+            else
+            {
+                Console.WriteLine("Please enter a valid number.");
+            }
+        }
+        if (PromptNum == 69)
+        {
+            Console.WriteLine("Nice.");
+            Thread.Sleep(1000);
+        }
+    }
+    return PromptNum;
 }
