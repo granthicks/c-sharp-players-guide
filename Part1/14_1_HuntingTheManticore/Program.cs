@@ -40,12 +40,55 @@ while (ManticoreHealth > 0 && CityHealth > 0)
     Console.WriteLine($"Round {GameRound}");
     Console.WriteLine($"City Health: {CityHealth}");
     Console.WriteLine($"Manticore Health: {ManticoreHealth}");
-    Thread.Sleep(1000);
+    Console.WriteLine("-----------------------------------");
+
+    int RangeGuess = PromptForNumber("Player 2: Input the range to fire the cannon.", 0, 100);
+
+    if (RangeGuess > ManticoreDistance)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Too far! The shot fell beyond the Manticore.");
+        Console.ResetColor();
+        Thread.Sleep(1000);
+        CityHealth--;
+    }
+    else if (RangeGuess < ManticoreDistance)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Too short! The shot didn't make it to the Manticore.");
+        Console.ResetColor();
+        Thread.Sleep(1000);
+        CityHealth--;
+    }
+    else
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Direct hit!");
+        int DamageDone = CalcDamage(GameRound);
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"The Manticore took {DamageDone} points of damage!");
+        Console.ResetColor();
+        Thread.Sleep(1000);
+        ManticoreHealth -= DamageDone;
+    }
     Console.Clear();
     GameRound++;
-    CityHealth--;
-    ManticoreHealth--;
 }
+
+if (CityHealth > 0)
+{
+    Console.ForegroundColor= ConsoleColor.Green;
+    Console.WriteLine("Success! The Manticore has been defeated!");
+    Console.ResetColor();
+}
+else
+{
+    Console.ForegroundColor= ConsoleColor.Red;
+    Console.WriteLine("Oh no! We weren't able to stop the Manticore and the city is lost!");
+    Console.ResetColor();
+}
+Console.Write("Press enter to exit.");
+string Quit = Console.ReadLine();
 
 int PromptForNumber(string message, int MinNum, int MaxNum)
 {
@@ -77,4 +120,20 @@ int PromptForNumber(string message, int MinNum, int MaxNum)
         }
     }
     return PromptNum;
+}
+
+int CalcDamage(int CurrentRound)
+{
+    if (CurrentRound % 3 == 0 && CurrentRound % 5 == 0)
+    {
+        return 10;
+    }
+    else if (CurrentRound % 3 == 0 || CurrentRound % 5 == 0)
+    {
+        return 3;
+    }
+    else
+    {
+        return 1;
+    }
 }
