@@ -13,7 +13,7 @@ Console.Title = "Simula's Soup";
 FoodType type;
 MainIngredient ingredient;
 SeasoningType seasoning;
-var food = (Type: type, Ingredient: ingredient, Seasoning: seasoning);
+
 
 Console.WriteLine("What type of food do you want to make?");
 Console.WriteLine("1 - Soup");
@@ -64,6 +64,8 @@ seasoning = thirdChoice switch
 };
 
 Console.Clear();
+
+var food = (Type: type, Ingredient: ingredient, Seasoning: seasoning);
 
 Console.WriteLine($"You have made {food.Seasoning} {food.Ingredient} {food.Type}.");
 
