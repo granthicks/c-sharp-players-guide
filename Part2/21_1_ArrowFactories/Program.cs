@@ -52,6 +52,8 @@ else if (first_choice == 3)
 }
 else
 {
+    Console.Clear();
+
     Console.WriteLine("What type of arrowhead would you like to use?");
     Console.WriteLine("1 - Steel");
     Console.WriteLine("2 - Wood");
