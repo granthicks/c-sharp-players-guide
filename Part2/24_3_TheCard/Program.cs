@@ -54,6 +54,28 @@ public class Card
     return !IsNumber();
   }
 }
-public enum Color { Red, Green, Blue, Yellow}
+public enum Color 
+{ 
+  Red,
+  Green,
+  Blue,
+  Yellow
+}
 
-public enum Rank { One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, DollarSign, Percent, Carrot, Ampersnad }
+public enum Rank 
+{
+  One,
+  Two,
+  Three,
+  Four,
+  Five,
+  Six,
+  Seven,
+  Eight,
+  Nine,
+  Ten,
+  DollarSign,
+  Percent,
+  Carrot,
+  Ampersand 
+}
