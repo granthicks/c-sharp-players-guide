@@ -8,52 +8,38 @@
 
 Console.Title = "The Color";
 
+Color c1 = Color.Green;
+Color c2 = new Color(255, 215, 0);
+
+Console.WriteLine($"Color 1: ({c1.R}, {c1.G}, {c1.B})");
+Console.WriteLine($"Color 1: ({c2.R}, {c2.G}, {c2.B})");
 
 public class Color
 {
-  public int RedChannel { get; set; }
-  public int GreenChannel { get; set; }
-  public int BlueChannel { get; set; }
+  public byte R { get; set; }
+  public byte G { get; set; }
+  public byte B { get; set; }
 
-  // TODO make constructors that limit ints between 0 and 255
-
-  public static Color CreateWhite()
+  public Color(byte r, byte g, byte b)
   {
-    return new Color(255, 255, 255);
-  }
-
-  public static Color CreateBlack()
-  {
-    return new Color(0, 0, 0);
-  }
-
-  public static Color CreateRed()
-  {
-    return new Color(255, 0, 0);
+    R = r;
+    G = g;
+    B = b;
   }
   
-  public static Color CreateOrange()
-  {
-    return new Color(255, 165, 0);
-  }
+  public static Color White { get; } = new Color(255, 255, 255);
 
-  public static Color CreateYellow()
-  {
-    return new Color(255,255,0);
-  }
+  public static Color Black { get; } = new Color(0, 0, 0);
 
-  public static Color CreateGreen()
-  {
-    return new Color(0,128,0);
-  }
+  public static Color Red { get; } = new Color(255, 0, 0);
+  
+  public static Color Orange { get; } = new Color(255, 165, 0);
 
-  public static Color CreateBlue()
-  {
-    return new Color(0,0,255);
-  }
+  public static Color Yellow { get; } = new Color(255, 255, 0);
 
-  public static Color CreatePurple()
-  {
-    return new Color(128,0,128);
-  }
+  public static Color Green { get; } = new Color(0, 128, 0);
+
+  public static Color Blue { get; } = new Color(0, 0, 255);
+
+  public static Color Purple { get; } = new Color(128, 0, 128);
 }
