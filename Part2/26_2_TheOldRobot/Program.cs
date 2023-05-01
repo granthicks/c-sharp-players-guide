@@ -14,7 +14,7 @@
  }
 }
 
-public class RobotCommand
+public abstract class RobotCommand
 {
     public abstract void Run(Robot robot);
 }
@@ -35,7 +35,7 @@ public class OffCommand : RobotCommand
     }
 }
 
-public class NorthCommand
+public class NorthCommand : RobotCommand
     {
     public override void Run(Robot robot)
     {
@@ -46,7 +46,7 @@ public class NorthCommand
     }
 }
 
-public class SouthCommand
+public class SouthCommand : RobotCommand
     {
     public override void Run(Robot robot)
     {
@@ -57,7 +57,7 @@ public class SouthCommand
     }
 }
 
-public class EastCommand
+public class EastCommand : RobotCommand
     {
     public override void Run(Robot robot)
     {
@@ -68,7 +68,7 @@ public class EastCommand
     }
 }
 
-public class WestCommand
+public class WestCommand : RobotCommand
     {
     public override void Run(Robot robot)
     {
@@ -83,10 +83,42 @@ public class Program
     {
     public static void Main()
     {
-    Robot robot = new Robot();
-    robot.Commands[0] = new OnCommand();
-    robot.Commands[1] = new NorthCommand();
-    robot.Commands[2] = new OffCommand();
-    robot.Run();
+        Robot robot = new Robot();
+
+        for (int i = 0; i < 3; i++)
+        {
+            Console.WriteLine("ROBOT COMMANDS");
+            Console.WriteLine("1. On");
+            Console.WriteLine("2. Off");
+            Console.WriteLine("3. North");
+            Console.WriteLine("4. South");
+            Console.WriteLine("5. East");
+            Console.WriteLine("6. West");
+        
+            Console.Write("Enter command: ");
+            int command = int.Parse(Console.ReadLine());
+
+            switch (command)
+            {
+                case 1:
+                    robot.Commands[i] = new OnCommand();
+                    break;
+                case 2:
+                    robot.Commands[i] = new OffCommand();
+                    break;
+                case 3:
+                    robot.Commands[i] = new NorthCommand();
+                    break;
+                case 4:
+                    robot.Commands[i] = new SouthCommand();
+                    break;
+                case 5:
+                    robot.Commands[i] = new EastCommand();
+                    break;
+                case 6:
+                    robot.Commands[i] = new WestCommand();
+                    break;
+            }
+        }
     }
 }
