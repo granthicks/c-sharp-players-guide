@@ -85,40 +85,40 @@ public class Program
     {
         Robot robot = new Robot();
 
-        for (int i = 0; i < 3; i++)
+        Console.WriteLine("Robot commands: on, off, north, south, east, west");
+
+        for (int i = 0; i < robot.Commands.Length; i++)
         {
-            Console.WriteLine("ROBOT COMMANDS");
-            Console.WriteLine("1. On");
-            Console.WriteLine("2. Off");
-            Console.WriteLine("3. North");
-            Console.WriteLine("4. South");
-            Console.WriteLine("5. East");
-            Console.WriteLine("6. West");
-        
-            Console.Write("Enter command: ");
-            int command = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter command:");
+            string command = Console.ReadLine().ToLower();
 
             switch (command)
             {
-                case 1:
+                case "on":
                     robot.Commands[i] = new OnCommand();
                     break;
-                case 2:
+                case "off":
                     robot.Commands[i] = new OffCommand();
                     break;
-                case 3:
+                case "north":
                     robot.Commands[i] = new NorthCommand();
                     break;
-                case 4:
+                case "south":
                     robot.Commands[i] = new SouthCommand();
                     break;
-                case 5:
+                case "east":
                     robot.Commands[i] = new EastCommand();
                     break;
-                case 6:
+                case "west":
                     robot.Commands[i] = new WestCommand();
+                    break;
+                default:
+                    Console.WriteLine("Invalid command");
+                    i--;
                     break;
             }
         }
+
+        robot.Run();
     }
 }
