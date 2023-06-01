@@ -41,37 +41,157 @@
 
 Console.Title = "The Fountain of Objects";
 
+// Main game class
+public class FountainOfObjects
+{
+    public Player Player { get; }
+    public Map Map { get; }
+
+    public FountainOfObjects()
+    {
+        Player = new Player();
+        Map = new Map();
+    }
+
+    // Runs the game
+    public void Run()
+    {
+        PlayerInput playerInput = new PlayerInput();
+        while (!HasWon)
+        {
+            SenseStuff();
+            IAction action = playerInput.ChooseAction();
+            action.Execute(this);
+        }
+    }
+
+    // Indicates if the player has won
+    private bool HasWon()
+    {
+       Room playersRoom = Map.GetRoom(Player.Location);
+       if (playersRoom is not EntranceRoom) return false;
+
+       for (int row = 0; row < Map.Rows; row++)
+       {
+           for (int column = 0; column < Map.Columns; column++)
+           {
+               Room room = Map.GetRoom(row, column);
+               if (room is FountainRoom fountainRoom)
+               {
+                   if (!fountainRoom.IsEnabled) return false;
+               }
+           }
+       }
+       return true;
+    }
+
+    public void SenseStuff()
+    {
+        // Sense stuff
+        // Print stuff
+    }
+}
+
+public interface IAction
+{
+    public void Execute(FountainOfObjects game);
+}
+
+public class MoveAction : IAction
+{
+    private readonly Direction _direction;
+    public MoveAction(Direction direction)
+    {
+        _direction = direction;
+    }
+    public void Execute(FountainOfObjects game)
+    {
+        Location current = game.Player.Location;
+    }
+
+    private Location GetRelativeLocation(Location start, Direction directionToMove)
+    {
+        return directionToMove switch
+        {
+            Direction.North => new Location(start.Row - 1, start.Column),
+            Direction.East => new Location(start.Row, start.Column + 1),
+            Direction.South => new Location(start.Row + 1, start.Column),
+            Direction.West => new Location(start.Row, start.Column - 1),
+            _ => throw new ArgumentException("Invalid direction", nameof(directionToMove))
+        };
+        }
+    }
+}
+
+// Represents the player input
+public class PlayerInput
+{
+    public IAction ChooseAction()
+    {
+        return null;
+    }
+}
+
 // Represents the map and what each room is made out of
 public class Map
 {
     private readonly Room[,] _rooms;
-    public int Rows { get; }
-    public int Columns { get; }
 
     public Map(int rows, int columns)
     {
-        Rows = rows;
-        Columns = columns;
         _rooms = new Room[rows, columns];
+        for (int row = 0; row < rows; row++)
+        {
+            for (int column = 0; column < columns; column++)
+                {
+                    _rooms[row, column] = new EmptyRoom();
+                }
+            
+            _rooms[0, 0] = new EntranceRoom();
+            _rooms[0, 2] = new FountainRoom();
+        }
     }
 
-    // Returns what type a room at a specific location is
+    public int Rows => 4;
+    public int Columns => 4;
+
+    // Get room at row and column
+    public Room GetRoom(int row, int column) => _rooms[row, column];
+    // Get room at location
+    public Room GetRoom(Location location) => GetRoom(location.Row, location.Column);
     
 }
 
+// Represents a location on the map
 public record Location(int Row, int Column);
+
+// Represents a room in the map
+public abstract class Room { }
+
+// Represents an empty room
+public class EmptyRoom : Room { }
+
+// Represents the entrance room
+public class EntranceRoom : Room { }
+
+// Represents the fountain room
+public class FountainRoom : Room
+{
+    // Indicates if the fountain is enabled
+    public bool IsEnabled { get; set; } = false;
+}
 
 // Represent the player
 public class Player
 {
     // current location
-    public Location Location { get; set; }
+    public Location Location { get; set; } = new Location(0, 0);
 
     // Indicates if the player is alive
-    public bool IsAlive { get; private set; } = true;
+    public bool IsAlive { get; set; } = true;
 
     // Explains why the player died
-    public string DeathReason { get; private set; } = "";
+    public string DeathReason { get; set; } = "";
 
     // Creates a new player at the given location
     public Player(Location location)
@@ -85,4 +205,21 @@ public class Player
         IsAlive = false;
         DeathReason = reason;
     }
+}
+
+// Different directions
+public enum Direction
+{
+    North,
+    East,
+    South,
+    West
+}
+
+// Different room types
+public enum RoomType
+{
+    Empty,
+    Entrance,
+    Fountain
 }
