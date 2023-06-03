@@ -88,7 +88,6 @@ public class FountainOfObjects
     public void SenseStuff()
     {
         // Sense stuff
-        // Print stuff
     }
 }
 
