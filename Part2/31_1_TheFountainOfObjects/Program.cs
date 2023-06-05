@@ -41,6 +41,10 @@
 
 Console.Title = "The Fountain of Objects";
 
+// Main Program
+FountainOfObjects game = new FountainOfObjects();
+game.Run();
+
 // Main game class
 public class FountainOfObjects
 {
@@ -50,14 +54,14 @@ public class FountainOfObjects
     public FountainOfObjects()
     {
         Player = new Player();
-        Map = new Map();
+        Map = new Map(4, 4);
     }
 
     // Runs the game
     public void Run()
     {
         PlayerInput playerInput = new PlayerInput();
-        while (!HasWon)
+        while (!HasWon())
         {
             SenseStuff();
             IAction action = playerInput.ChooseAction();
@@ -87,7 +91,7 @@ public class FountainOfObjects
 
     public void SenseStuff()
     {
-        // Sense stuff
+        Console.WriteLine($"You are in the room at {Player.Location.Row}, {Player.Location.Column}.");
     }
 }
 
@@ -106,6 +110,15 @@ public class MoveAction : IAction
     public void Execute(FountainOfObjects game)
     {
         Location current = game.Player.Location;
+        Location next = GetRelativeLocation(current, _direction);
+        if (game.Map.IsValidLocation(next))
+        {
+            game.Player.Location = next;
+        }
+        else
+        {
+            Console.WriteLine("You can't move there.");
+        }
     }
 
     private Location GetRelativeLocation(Location start, Direction directionToMove)
@@ -118,7 +131,6 @@ public class MoveAction : IAction
             Direction.West => new Location(start.Row, start.Column - 1),
             _ => throw new ArgumentException("Invalid direction", nameof(directionToMove))
         };
-        }
     }
 }
 
@@ -127,7 +139,16 @@ public class PlayerInput
 {
     public IAction ChooseAction()
     {
-        return null;
+        Console.Write("What do you want to do? ");
+        string input = Console.ReadLine();
+        string[] parts = input.Split(' ');
+        string action = parts[0];
+        string direction = parts[1];
+        return action switch
+        {
+            "move" => new MoveAction(DirectionParser.Parse(direction)),
+            _ => throw new ArgumentException("Invalid action", nameof(action))
+        };
     }
 }
 
@@ -154,6 +175,11 @@ public class Map
     public int Rows => 4;
     public int Columns => 4;
 
+    // Checks if the location is valid
+    public bool IsValidLocation(Location location)
+    {
+        return location.Row >= 0 && location.Row <= Rows && location.Column >= 0 && location.Column <= Columns;
+    }
     // Get room at row and column
     public Room GetRoom(int row, int column) => _rooms[row, column];
     // Get room at location
@@ -193,16 +219,32 @@ public class Player
     public string DeathReason { get; set; } = "";
 
     // Creates a new player at the given location
-    public Player(Location location)
-    {
-        Location = location;
-    }
+    // public Player(Location location)
+    // {
+    //     Location = location;
+    // }
 
     // Kills the player and sets the death reason
     public void Die(string reason)
     {
         IsAlive = false;
         DeathReason = reason;
+    }
+}
+
+// Parse direction from string
+public static class DirectionParser
+{
+    public static Direction Parse(string direction)
+    {
+        return direction switch
+        {
+            "north" => Direction.North,
+            "east" => Direction.East,
+            "south" => Direction.South,
+            "west" => Direction.West,
+            _ => throw new ArgumentException("Invalid direction", nameof(direction))
+        };
     }
 }
 
