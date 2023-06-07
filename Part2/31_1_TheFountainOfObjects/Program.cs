@@ -83,6 +83,9 @@ public class FountainOfObjects
         }
         Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine("You win! The Fountain of Objects has been reactivated and you have escaped the cavern!");
+        Console.ResetColor();
+        Console.WriteLine("Press enter to exit.");
+        Console.ReadLine();
     }
 
     // Indicates if the player has won
@@ -196,6 +199,22 @@ public class EnableFountainAction : IAction
     }
 }
 
+// Represents the help action to describe actions that the player can make
+public class HelpAction : IAction
+{
+    public void Execute(FountainOfObjects game)
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("You can type the following actions:");
+        Console.WriteLine("move north");
+        Console.WriteLine("move east");
+        Console.WriteLine("move south");
+        Console.WriteLine("move west");
+        Console.WriteLine("enable fountain");
+        Console.ResetColor();
+    }
+}
+
 // Represents the player input
 public class PlayerInput
 {
@@ -214,6 +233,8 @@ public class PlayerInput
             "move south" => new MoveAction(Direction.South),
             "move west" => new MoveAction(Direction.West),
             "enable fountain" => new EnableFountainAction(),
+            "help" => new HelpAction(),
+            "?" => new HelpAction(),
             _ => null
         };
 
