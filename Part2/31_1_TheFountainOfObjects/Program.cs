@@ -139,16 +139,29 @@ public class PlayerInput
 {
     public IAction ChooseAction()
     {
-        Console.Write("What do you want to do? ");
-        string input = Console.ReadLine();
-        string[] parts = input.Split(' ');
-        string action = parts[0];
-        string direction = parts[1];
-        return action switch
+        do
         {
-            "move" => new MoveAction(DirectionParser.Parse(direction)),
-            _ => throw new ArgumentException("Invalid action", nameof(action))
+        Console.Write("What do you want to do? ");
+        string? input = Console.ReadLine();
+        IAction? playerAction = input switch
+        {
+            "move north" => new MoveAction(Direction.North),
+            "move east" => new MoveAction(Direction.East),
+            "move south" => new MoveAction(Direction.South),
+            "move west" => new MoveAction(Direction.West),
+            _ => null
         };
+
+        if (playerAction != null)
+        {
+            return playerAction;
+        }
+        else
+        {
+            Console.WriteLine("Invalid action.");
+        }
+        }
+        while (true);
     }
 }
 
