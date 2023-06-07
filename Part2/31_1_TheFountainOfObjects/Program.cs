@@ -67,6 +67,7 @@ public class FountainOfObjects
             IAction action = playerInput.ChooseAction();
             action.Execute(this);
         }
+        Console.WriteLine("You win! The Fountain of Objects has been reactivated and you have escaped the cavern!");
     }
 
     // Indicates if the player has won
@@ -161,6 +162,21 @@ public class MoveAction : IAction
     }
 }
 
+public class EnableFountainAction : IAction
+{
+    public void Execute(FountainOfObjects game)
+    {
+        if (game.Map.GetRoom(game.Player.Location) is FountainRoom fountainRoom)
+        {
+            fountainRoom.IsEnabled = true;
+        }
+        else
+        {
+            Console.WriteLine("You can't enable the fountain here.");
+        }
+    }
+}
+
 // Represents the player input
 public class PlayerInput
 {
@@ -176,6 +192,7 @@ public class PlayerInput
             "move east" => new MoveAction(Direction.East),
             "move south" => new MoveAction(Direction.South),
             "move west" => new MoveAction(Direction.West),
+            "enable fountain" => new EnableFountainAction(),
             _ => null
         };
 
