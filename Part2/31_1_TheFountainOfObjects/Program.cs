@@ -60,6 +60,20 @@ public class FountainOfObjects
     // Runs the game
     public void Run()
     {
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(@" ______ _            ______                                                _      __   _                     
+(_) |  | |          (_) |                               o                 | |    /\_\/| |  o                 
+    |  | |     _       _|_  __          _  _  _|_  __,      _  _      __  | |   |    || |     _   __ _|_  ,  
+  _ |  |/ \   |/      / | |/  \_|   |  / |/ |  |  /  |  |  / |/ |    /  \_|/    |    ||/ \_| |/  /    |  / \_
+ (_/   |   |_/|__/   (_/   \__/  \_/|_/  |  |_/|_/\_/|_/|_/  |  |_/  \__/ |__/   \__/  \_/ |/|__/\___/|_/ \/ 
+                                                                          |\              /|                 
+                                                                          |/              \|                           
+");
+        Console.ResetColor();
+        Console.WriteLine("Press enter to begin.");
+        Console.ReadLine();
+        Console.Clear();
+
         PlayerInput playerInput = new PlayerInput();
         while (!HasWon())
         {
@@ -67,6 +81,7 @@ public class FountainOfObjects
             IAction action = playerInput.ChooseAction();
             action.Execute(this);
         }
+        Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine("You win! The Fountain of Objects has been reactivated and you have escaped the cavern!");
     }
 
@@ -103,7 +118,9 @@ public class FountainOfObjects
     {
         if (Map.GetRoom(Player.Location) is EntranceRoom)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("You see light in this room coming from outside the cavern. This is the entrance.");
+            Console.ResetColor();
         }
     }
 
@@ -111,6 +128,7 @@ public class FountainOfObjects
     {
         if (Map.GetRoom(Player.Location) is FountainRoom fountainRoom)
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             if (fountainRoom.IsEnabled)
             {
                 Console.WriteLine("You hear the rushing waters from the Fountain of Objects. It has been reactivated!");
@@ -119,6 +137,7 @@ public class FountainOfObjects
             {
                 Console.WriteLine("You hear water dripping in this room. The Fountain of Objects is here!");
             }
+            Console.ResetColor();
         }
     }
 }
@@ -185,7 +204,9 @@ public class PlayerInput
         do
         {
         Console.Write("What do you want to do? ");
+        Console.ForegroundColor = ConsoleColor.Cyan;
         string? input = Console.ReadLine();
+        Console.ResetColor();
         IAction? playerAction = input switch
         {
             "move north" => new MoveAction(Direction.North),
