@@ -89,9 +89,36 @@ public class FountainOfObjects
        return true;
     }
 
-    public void SenseStuff()
+    private void SenseStuff()
     {
         Console.WriteLine($"You are in the room at {Player.Location.Row}, {Player.Location.Column}.");
+
+        SenseEntrance();
+
+        SenseFountain();
+    }
+
+    private void SenseEntrance()
+    {
+        if (Map.GetRoom(Player.Location) is EntranceRoom)
+        {
+            Console.WriteLine("You see light in this room coming from outside the cavern. This is the entrance.");
+        }
+    }
+
+    private void SenseFountain()
+    {
+        if (Map.GetRoom(Player.Location) is FountainRoom fountainRoom)
+        {
+            if (fountainRoom.IsEnabled)
+            {
+                Console.WriteLine("You hear the rushing waters from the Fountain of Objects. It has been reactivated!");
+            }
+            else
+            {
+                Console.WriteLine("You hear water dripping in this room. The Fountain of Objects is here!");
+            }
+        }
     }
 }
 
@@ -154,11 +181,14 @@ public class PlayerInput
 
         if (playerAction != null)
         {
+            Console.Clear();
             return playerAction;
         }
         else
         {
             Console.WriteLine("Invalid action.");
+            System.Threading.Thread.Sleep(3000);
+            Console.Clear();
         }
         }
         while (true);
