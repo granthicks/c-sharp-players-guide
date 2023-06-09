@@ -60,6 +60,7 @@ public class FountainOfObjects
     // Runs the game
     public void Run()
     {
+        Console.Clear();
         Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine(@" ______ _            ______                                                _      __   _                     
 (_) |  | |          (_) |                               o                 | |    /\_\/| |  o                 
@@ -74,6 +75,11 @@ public class FountainOfObjects
         Console.ReadLine();
         Console.Clear();
 
+        Console.WriteLine("You enter the Cavern of Objects, a maze of rooms filled with dangerous pits in search of the Fountain of Objects.");
+        Console.WriteLine("Light is visible only in the entrance, and no other light is seen anywhere in the caverns.");
+        Console.WriteLine("You must navigate the Caverns with your other senses.");
+        Console.WriteLine("Find the Fountain of Objects, activate it, and return to the entrance.");
+
         PlayerInput playerInput = new PlayerInput();
         while (!HasWon())
         {
@@ -86,6 +92,7 @@ public class FountainOfObjects
         Console.ResetColor();
         Console.WriteLine("Press enter to exit.");
         Console.ReadLine();
+        Console.Clear();
     }
 
     // Indicates if the player has won
