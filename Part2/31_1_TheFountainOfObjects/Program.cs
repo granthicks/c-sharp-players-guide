@@ -75,6 +75,9 @@ public class FountainOfObjects
         Console.ReadLine();
         Console.Clear();
 
+        // Catpure start time
+        DateTime startTime = DateTime.Now;
+
         Console.WriteLine("You enter the Cavern of Objects, a maze of rooms filled with dangerous pits in search of the Fountain of Objects.");
         Console.WriteLine("Light is visible only in the entrance, and no other light is seen anywhere in the caverns.");
         Console.WriteLine("You must navigate the Caverns with your other senses.");
@@ -90,6 +93,15 @@ public class FountainOfObjects
         Console.ForegroundColor = ConsoleColor.Magenta;
         Console.WriteLine("You win! The Fountain of Objects has been reactivated and you have escaped the cavern!");
         Console.ResetColor();
+
+        // Capture end time
+        DateTime endTime = DateTime.Now;
+
+        // Calculate elapsed time
+        TimeSpan elapsedTime = endTime - startTime;
+
+        // Display elapsed time
+        Console.WriteLine($"You took {elapsedTime.TotalSeconds} seconds to complete the game.");
         Console.WriteLine("Press enter to exit.");
         Console.ReadLine();
         Console.Clear();
